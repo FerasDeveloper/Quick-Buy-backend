@@ -1,0 +1,8 @@
+# GET http://localhost:8000/api/ShowDomains
+
+POST http://localhost:8000/api/ShowProfile
+Content-Type: application/json
+{
+  {{$aadToken}}
+  "userType": "3"
+}
