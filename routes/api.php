@@ -25,6 +25,15 @@ Route::get('/ShowDomain/{id}', [ProductController::class, 'Show_Domain']);
 Route::get('/test-files', function () {
     return Storage::files('public/images');
 });
+Route::get('/images/{filename}', function ($filename) {
+    $path = storage_path('app/public/images/' . $filename);
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    return response()->file($path);
+});
 Route::middleware('auth:sanctum')->group(function () {
   
   Route::get('/Logout', [AuthController::class, 'Logout']);
