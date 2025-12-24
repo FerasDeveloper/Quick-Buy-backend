@@ -25,7 +25,7 @@ class ProductController extends Controller
       'available' => 'required',
       'image' => 'required|mimes:jpeg,bmp,png,jpg,gif|max:2048',
     ]);
-dd($request->file('image'));
+
     $user = Auth::user();
     $store = Store::query()->where('userId', $user['id'])->first();
     $domain = Domain::query()->where('id', $store['domainId'])->first();
