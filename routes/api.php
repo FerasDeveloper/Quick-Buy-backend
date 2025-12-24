@@ -8,7 +8,7 @@ use App\Http\Controllers\TaskController;
 use Illuminate\Console\View\Components\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Storage;
 
 // Route::get('/img', [AuthController::class, 'showImage']);
 
@@ -22,7 +22,9 @@ Route::post('/Check/{username}', [AuthController::class, 'Check']);
 Route::get('/ResendCode/{username}', [AuthController::class, 'Resend_Code']);
 Route::get('/ShowDomains', [ProductController::class, 'Show_Domains']);
 Route::get('/ShowDomain/{id}', [ProductController::class, 'Show_Domain']);
-
+Route::get('/test-files', function () {
+    return Storage::files('public/images');
+});
 Route::middleware('auth:sanctum')->group(function () {
   
   Route::get('/Logout', [AuthController::class, 'Logout']);
