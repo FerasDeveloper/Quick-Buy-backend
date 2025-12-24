@@ -7,10 +7,10 @@ use App\Models\Product;
 use App\Models\Report;
 use App\Models\Store;
 use App\Models\Wallet;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\UploadImageController;
 
 class ProductController extends Controller
 {
