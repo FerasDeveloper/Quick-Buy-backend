@@ -36,6 +36,7 @@ Route::get('/images/{filename}', function ($filename) {
 
   return response()->file($path);
 });
+
 Route::post('/upload', function (Illuminate\Http\Request $request) {
     $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
     return response()->json(['url' => $uploadedFileUrl]);
