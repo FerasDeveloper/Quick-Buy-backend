@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TaskController;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Console\View\Components\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -34,6 +35,10 @@ Route::get('/images/{filename}', function ($filename) {
   }
 
   return response()->file($path);
+});
+Route::post('/upload', function (Illuminate\Http\Request $request) {
+    $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+    return response()->json(['url' => $uploadedFileUrl]);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
