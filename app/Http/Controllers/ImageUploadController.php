@@ -13,7 +13,7 @@ class ImageUploadController extends Controller
             'image' => 'required|image|max:5120', // 5MB
         ]);
 
-        $apiKey = env('IMGBB_API_KEY');
+        $apiKey = '9313087d1bc5354546032f044408d3c1';
 
         // 3) تحويل الصورة إلى Base64 كما يدعم ImgBB في بارامتر image
         $imageBase64 = base64_encode(
