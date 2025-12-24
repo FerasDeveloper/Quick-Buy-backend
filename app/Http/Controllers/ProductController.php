@@ -56,10 +56,19 @@ class ProductController extends Controller
       $product->storeId = $store['id'];
 
       if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('images', 'public');
-        $product->image = asset('storage/' . $imagePath);
-        $product->save();
+        $imageUrl = UploadImageController::uploadToImgBB($request->file('image'));
+        if ($imageUrl) {
+          $product->image = $imageUrl; // تخزين الرابط الراجع
+        }
       }
+
+      $product->save();
+
+      // if ($request->hasFile('image')) {
+      //   $imagePath = $request->file('image')->store('images', 'public');
+      //   $product->image = asset('storage/' . $imagePath);
+      //   $product->save();
+      // }
 
       $wallet->postsNumber = $wallet->postsNumber - 1;
       $wallet->save();

@@ -26,8 +26,6 @@ Route::get('/ResendCode/{username}', [AuthController::class, 'Resend_Code']);
 Route::get('/ShowDomains', [ProductController::class, 'Show_Domains']);
 Route::get('/ShowDomain/{id}', [ProductController::class, 'Show_Domain']);
 
-Route::post('/upload-image', [ImageUploadController::class, 'upload']);
-
 Route::middleware('auth:sanctum')->group(function () {
 
   Route::get('/Logout', [AuthController::class, 'Logout']);
