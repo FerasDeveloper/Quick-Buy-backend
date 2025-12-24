@@ -35,6 +35,7 @@ Route::get('/images/{filename}', function ($filename) {
 
     return response()->file($path);
 });
+
 Route::middleware('auth:sanctum')->group(function () {
   
   Route::get('/Logout', [AuthController::class, 'Logout']);
