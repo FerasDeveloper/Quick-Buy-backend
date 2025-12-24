@@ -23,7 +23,7 @@ Route::get('/ResendCode/{username}', [AuthController::class, 'Resend_Code']);
 Route::get('/ShowDomains', [ProductController::class, 'Show_Domains']);
 Route::get('/ShowDomain/{id}', [ProductController::class, 'Show_Domain']);
 Route::get('/test-files', function () {
-    return Storage::files('public/images');
+    return Storage::files('public');
 });
 Route::middleware('auth:sanctum')->group(function () {
   
