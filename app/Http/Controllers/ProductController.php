@@ -55,14 +55,17 @@ class ProductController extends Controller
       $product->storeId = $store['id'];
 
       if ($request->hasFile('image')) {
-          $imagePath = $request->file('image')->store('images', 'public');
-          $product->image = asset('storage/' . $imagePath);
-          $product->save();
+        $imagePath = $request->file('image')->store('images', 'public');
+        $product->image = asset('storage/' . $imagePath);
+        $product->save();
+        return response()->json([
+          'message' => $imagePath
+        ]);
       }
 
       $wallet->postsNumber = $wallet->postsNumber - 1;
       $wallet->save();
-      
+
       if (isset($product)) {
         return response()->json([
           'message' => 'Product has added Successfully.'
@@ -217,7 +220,8 @@ class ProductController extends Controller
     return $domain;
   }
 
-  public function Show_Domain($id){
+  public function Show_Domain($id)
+  {
 
     $domain = Domain::query()->where('id', $id)->first();
     return $domain;
