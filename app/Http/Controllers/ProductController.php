@@ -56,10 +56,8 @@ class ProductController extends Controller
       $product->storeId = $store['id'];
 
       if ($request->hasFile('image')) {
-        // $imagePath = $request->file('image')->store('images', 'public');
-        // $product->image = asset('storage/' . $imagePath);
-        $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-        $product->image = $uploadedFileUrl;
+        $imagePath = $request->file('image')->store('images', 'public');
+        $product->image = asset('storage/' . $imagePath);
         $product->save();
       }
 

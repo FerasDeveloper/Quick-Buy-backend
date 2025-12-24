@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TaskController;
@@ -24,24 +25,8 @@ Route::post('/Check/{username}', [AuthController::class, 'Check']);
 Route::get('/ResendCode/{username}', [AuthController::class, 'Resend_Code']);
 Route::get('/ShowDomains', [ProductController::class, 'Show_Domains']);
 Route::get('/ShowDomain/{id}', [ProductController::class, 'Show_Domain']);
-Route::get('/test-files', function () {
-  dd(config('services.cloudinary.url'));
-});
-Route::get('/images/{filename}', function ($filename) {
-  $path = storage_path('app/public/images/' . $filename);
 
-  if (!File::exists($path)) {
-    abort(404);
-  }
-
-  return response()->file($path);
-});
-
-Route::post('/upload', function (Illuminate\Http\Request $request) {
-  $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-  return response()->json(['url' => $uploadedFileUrl]);
-});
-
+Route::post('/upload-image', [ImageUploadController::class, 'upload']);
 
 Route::middleware('auth:sanctum')->group(function () {
 
