@@ -159,19 +159,13 @@ class ProductController extends Controller
     $product->price = $request['price'];
     $product->available = $request['available'];
     $product->amount = $request['amount'];
-
-    // إذا تم تحميل صورة جديدة
+    
     if ($request->hasFile('image')) {
-      // حذف الصورة القديمة إذا كانت موجودة
-      if ($product->image && Storage::disk('public')->exists($product->image)) {
-        Storage::disk('public')->delete($product->image);
+      $imageUrl = UploadImageController::uploadToImgBB($request->file('image'));
+      if ($imageUrl) {
+        $product->image = $imageUrl;
       }
-
-      // حفظ الصورة الجديدة
-      $imagePath = $request->file('image')->store('images', 'public');
-      $product->image = asset('storage/' . $imagePath);
     }
-
     // حفظ التحديثات
     $product->save();
 
