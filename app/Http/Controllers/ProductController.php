@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Report;
 use App\Models\Store;
 use App\Models\Wallet;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -55,12 +56,11 @@ class ProductController extends Controller
       $product->storeId = $store['id'];
 
       if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('images', 'public');
-        $product->image = asset('storage/' . $imagePath);
+        // $imagePath = $request->file('image')->store('images', 'public');
+        // $product->image = asset('storage/' . $imagePath);
+        $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        $product->image = $uploadedFileUrl;
         $product->save();
-        return response()->json([
-          'message' => $imagePath
-        ]);
       }
 
       $wallet->postsNumber = $wallet->postsNumber - 1;
