@@ -24,7 +24,7 @@ Route::get('/ResendCode/{username}', [AuthController::class, 'Resend_Code']);
 Route::get('/ShowDomains', [ProductController::class, 'Show_Domains']);
 Route::get('/ShowDomain/{id}', [ProductController::class, 'Show_Domain']);
 Route::get('/test-files', function () {
-  dd(env('CLOUDINARY_URL'));
+  dd(config('services.cloudinary.url'));
 });
 Route::get('/images/{filename}', function ($filename) {
   $path = storage_path('app/public/images/' . $filename);
