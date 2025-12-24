@@ -24,22 +24,22 @@ Route::get('/ResendCode/{username}', [AuthController::class, 'Resend_Code']);
 Route::get('/ShowDomains', [ProductController::class, 'Show_Domains']);
 Route::get('/ShowDomain/{id}', [ProductController::class, 'Show_Domain']);
 Route::get('/test-files', function () {
-    return Storage::files('public/images');
+  dd(env('CLOUDINARY_URL'));
 });
 Route::get('/images/{filename}', function ($filename) {
-    $path = storage_path('app/public/images/' . $filename);
+  $path = storage_path('app/public/images/' . $filename);
 
-    if (!File::exists($path)) {
-        abort(404);
-    }
+  if (!File::exists($path)) {
+    abort(404);
+  }
 
-    return response()->file($path);
+  return response()->file($path);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-  
+
   Route::get('/Logout', [AuthController::class, 'Logout']);
-  
+
   //Profile
   Route::get('/ShowProfile', [TaskController::class, 'Show_Profile']);
   Route::Post('/EditProfile', [TaskController::class, 'Edit_Profile']);
